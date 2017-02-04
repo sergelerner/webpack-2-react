@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server",
+    "prod-local": "NODE_ENV=production webpack-dev-server -p",
+    "stg-deploy": "rm -rf static && DEPLOY_TARGET=STAGING_SITE_URL NODE_ENV=production webpack -p",
+    "prod-deploy": "rm -rf static && DEPLOY_TARGET=PRODUCTION_SITE_URL NODE_ENV=production webpack -p"
   },
   "repository": {
     "type": "git",
