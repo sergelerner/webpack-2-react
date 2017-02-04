@@ -1,0 +1,36 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [ "airbnb-base", "plugin:react/recommended" ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": [ "react", "babel"],
+  "rules": {
+    "no-nested-ternary": 0,
+    # BABEL
+    "babel/generator-star-spacing": 1,
+    "babel/no-await-in-loop": 1,
+    "babel/flow-object-type": 1,
+    "import/no-unresolved": [2, {
+      ignore: ['^meteor/.*', '^\.']
+    }],
+    "no-unused-vars": [2, {
+      argsIgnorePattern: "^_",
+      varsIgnorePattern: "^_"
+    }],
+    "no-use-before-define": 0,
+  },
+  "globals": {
+    "atatus": false,
+    "JacoRecorder": false,
+  }
+}
