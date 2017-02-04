@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router/es6';
+import { Router, Route, browserHistory } from 'react-router';
 
 const root = document.createElement('root');
 document.body.appendChild(root);
