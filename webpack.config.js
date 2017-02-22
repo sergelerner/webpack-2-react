@@ -48,7 +48,7 @@ const plugins = [
     allChunks: true,
   }),
   new HtmlWebpackPlugin({
-    title: 'AI Talent Agent For Developers - Yodas',
+    title: '',
     template: 'index.ejs',
     favicon: './assets/favicon.ico',
   }),
