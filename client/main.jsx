@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router } from 'react-router';
+import { Route } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import './styles/style.scss';
 
 const root = document.createElement('root');
 document.body.appendChild(root);
+
+const history = createBrowserHistory();
 
 class App extends Component {
   render() {
@@ -18,9 +22,9 @@ class App extends Component {
 }
 
 ReactDOM.render(
-  <Router history={browserHistory}>
+  <Router history={history}>
     <Route path="/" component={App} />
   </Router>
   ,
-  root
+  root,
 );
