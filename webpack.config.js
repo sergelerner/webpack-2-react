@@ -2,32 +2,14 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const S3Plugin = require('webpack-s3-plugin');
 
-const settingsLocal = require('./settings-local.json');
+const settings = require('./settings.json');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isDeploy = (nodeEnv === 'production');
-const deployTarget = process.env.DEPLOY_TARGET;
 
 const sourcePath = path.join(__dirname, './client');
 const staticsPath = path.join(__dirname, './static');
-const bucket = (deployTarget === 'STAGING_SITE_URL')
-  ? 'STAGING_SITE_BUCKET'
-  : 'PRODUCTION_SITE_BUCKET';
-
-var settings = settingsLocal;
-if (isDeploy) {
-  if (deployTarget === 'STAGING_SITE_URL') {
-    settings = require('./settings-stg.json');
-  } else if (deployTarget === 'PRODUCTION_SITE_URL') {
-    settings = require('./settings-prod-tmp1.json');
-  } else {
-    throw "Unsupported deploy target: " + deployTarget;
-  }
-}
-
-console.log({ deployTarget, nodeEnv });
 
 const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
@@ -82,8 +64,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: (isDeploy)
           ? ExtractTextPlugin.extract({
-            fallbackLoader: 'style-loader',
-            loader: [
+            fallback: 'style-loader',
+            use: [
               'css-loader?sourceMap',
               'resolve-url-loader',
               'sass-loader?sourceMap',
@@ -119,14 +101,6 @@ module.exports = {
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false,
-      }),
-      new S3Plugin({
-        s3Options: {
-          region: 'us-west-2',
-        },
-        s3UploadOptions: {
-          Bucket: bucket,
-        },
       }),
     ]
     : [
